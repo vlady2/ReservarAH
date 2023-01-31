@@ -70,10 +70,6 @@ namespace ReservaAH
         {
             try
             {
-                //en.Opcion = 3;
-                //en.Id_Usu = 3;
-                
-                //respuesta = bl.Crub_Usuario(en);
                 cargarGridView("All");
                 limpiarControles();
             }

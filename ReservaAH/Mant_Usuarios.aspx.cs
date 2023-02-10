@@ -14,6 +14,8 @@ namespace ReservaAH
         Usuarios en = new Usuarios();
         Usuarios_BL bl = new Usuarios_BL();
         bool respuesta;
+        Int64 id = 0;
+        bool CUpdate = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarDataUser();
@@ -25,60 +27,81 @@ namespace ReservaAH
         {
             try 
             {
-                en.Opcion = 1;
-                en.Correo_Usu = txtcorreo.Text;
-                en.Contra_Usu = txtpasword.Text;
-                en.Avatar_Usu = txtavatar.Text;
-                en.Id_Usu = Convert.ToInt32(txtrol.Text);
-
+                if (CUpdate == false)
+                {
+                    en.Opcion = 1;
+                    en.Correo_Usu = txtcorreo.Text;
+                    en.Contra_Usu = txtpasword.Text;
+                    en.Avatar_Usu = txtavatar.Text;
+                    en.Id_Rol = Convert.ToInt32(txtrol.Text);
+                }
+                else
+                {
+                    en.Opcion = 2;
+                    en.Id_Usu = id;
+                    en.Correo_Usu = txtcorreo.Text;
+                    en.Contra_Usu = txtpasword.Text;
+                    en.Avatar_Usu = txtavatar.Text;
+                    en.Id_Rol = Convert.ToInt32(txtrol.Text);
+                }
                 respuesta = bl.Crub_Usuario(en);
-
-                Response.Write("<script>alert('"+respuesta+"')</script>");
-                cargarGridView("All");
-                limpiarControles();
+                if (respuesta == true)
+                {
+                    Response.Write("<script>alert('Usuario Guardado')</script>");
+                    cargarGridView("All");
+                    limpiarControles();
+                    CUpdate = false;
+                }
+                else
+                {
+                    Response.Write("<script>alert('Error, Algo fallo en el salvado de la informacion')</script>");
+                }
             }
-            catch
+            catch (Exception ex)
             {
-
+                Response.Write("<script>alert('" + ex.Message + "')</script>");
             }
-
         }
-
-        protected void btnactualizar_Click(object sender, EventArgs e)
+        protected void gvUser_RowEditing(object sender, GridViewEditEventArgs e)
         {
             try
             {
-                en.Opcion = 2;
-                en.Id_Usu = 3;
-                en.Correo_Usu = txtcorreo.Text;
-                en.Contra_Usu = txtpasword.Text;
-                en.Avatar_Usu = txtavatar.Text;
-                en.Id_Usu = Convert.ToInt32(txtrol.Text);
-
-                respuesta = bl.Crub_Usuario(en);
-                Response.Write("<script>alert('" + respuesta + "')</script>");
-                cargarGridView("All");
-                limpiarControles();
+                id = Convert.ToInt64(((GridView)sender).Rows[e.NewEditIndex].Cells[1].Text);
+                txtcorreo.Text = ((GridView)sender).Rows[e.NewEditIndex].Cells[2].Text;
+                txtpasword.Text = ((GridView)sender).Rows[e.NewEditIndex].Cells[3].Text;
+                txtavatar.Text = ((GridView)sender).Rows[e.NewEditIndex].Cells[4].Text;
+                txtrol.Text = ((GridView)sender).Rows[e.NewEditIndex].Cells[5].Text;
+                CUpdate = true;
             }
-            catch
+            catch (Exception ex)
             {
-                Response.Write("<script>alert('" + respuesta + "')</script>");
+                Response.Write("<script>alert('" + ex.Message + "')</script>");
             }
-        }
 
-        protected void btnaeliminar_Click(object sender, EventArgs e)
+        }
+        protected void gvUser_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
             {
-                cargarGridView("All");
-                limpiarControles();
+                en.Opcion = 3;
+                en.Id_Usu = Convert.ToInt32(((GridView)sender).Rows[e.RowIndex].Cells[1].Text);
+                en.Correo_Usu = "";
+                en.Contra_Usu = "";
+                en.Avatar_Usu = "";
+                en.Id_Rol = 1;
+
+                respuesta = bl.Crub_Usuario(en);
+                if (respuesta == true)
+                {
+                    Response.Write("<script>alert('Usuario eliminado')</script>");
+                    cargarGridView("All");
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                Response.Write("<script>alert('" + respuesta + "')</script>");
+                Response.Write("<script>alert('" + ex.Message + "')</script>");
             }
         }
-
         public void cargarGridView(string variable)
         {
             try

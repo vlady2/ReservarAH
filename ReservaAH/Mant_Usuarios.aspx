@@ -40,27 +40,33 @@
         </div>
     </nav>
     <form id="form1" runat="server" class="row g-2 formP">
-        <div class="col-auto">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <asp:TextBox ID="txtcorreo" type="email" runat="server" class="form-control"></asp:TextBox>
-
-            <label for="exampleFormControlInput1" class="form-label">Password</label>
-            <asp:TextBox ID="txtpasword" TextMode="Password" runat="server" class="form-control"></asp:TextBox>
-            
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Picture profile</label>
-                <asp:TextBox ID="txtavatar" runat="server" accep=".jpg" type="file" class="form-control"></asp:TextBox>
+        <div class="container text-center">
+            <div class="row align-items-start">
+                <div class="col">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <asp:TextBox ID="txtcorreo" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                <div class="col">
+                    <label for="exampleFormControlInput1" class="form-label">Password</label>
+                    <asp:TextBox ID="txtpasword" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                <div class="col">
+                    <label for="exampleFormControlInput1" class="form-label">Rol</label>
+                    <asp:TextBox ID="txtrol" runat="server" class="form-control"></asp:TextBox>
+                </div>
             </div>
-            
-            <label for="exampleFormControlInput1" class="form-label">Rol</label>
-            <asp:TextBox ID="txtrol" runat="server" class="form-control"></asp:TextBox>
+            <label for="formFile" class="form-label">Picture profile</label>
+            <asp:TextBox ID="txtavatar" runat="server" class="form-control"></asp:TextBox>
             <br />
-            <asp:Button class="btn btn-secondary" ID="btnGuardar" runat="server" Text="Add new" data-togle="tooltip" title="add new user" OnClick="btnGuardar_Click"/>
-            <asp:Button class="btn btn-secondary" ID="btnactualizar" runat="server" Text="Update" data-togle="tooltip" title="update user" OnClick="btnactualizar_Click"/>
-            <asp:Button class="btn btn-secondary" ID="btnaeliminar" runat="server" Text="Delete" data-togle="tooltip" title="delete user" OnClick="btnaeliminar_Click"/>
+            <asp:Button class="btn btn-secondary" ID="btnGuardar" runat="server" Text="Save user" data-togle="tooltip" title="Save" OnClick="btnGuardar_Click"/>
         </div>
+        <br />
         <div class="col-auto">
-            <asp:GridView class="table table-sm" ID="gvUser" runat="server"></asp:GridView>
+            <asp:GridView class="table table-sm" ID="gvUser" runat="server" DataKeyNames="Id_Usu" OnRowDeleting="gvUser_RowDeleting" OnRowEditing="gvUser_RowEditing">
+                <Columns>
+                    <asp:CommandField ButtonType="Button" ShowEditButton="true" ShowDeleteButton="true" />
+                </Columns>
+            </asp:GridView>
         </div>
     </form>
 </body>

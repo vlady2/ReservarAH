@@ -60,15 +60,6 @@ namespace ReservaAH
         protected global::System.Web.UI.WebControls.TextBox txtpasword;
 
         /// <summary>
-        /// Control txtavatar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtavatar;
-
-        /// <summary>
         /// Control txtrol.
         /// </summary>
         /// <remarks>
@@ -78,6 +69,15 @@ namespace ReservaAH
         protected global::System.Web.UI.WebControls.TextBox txtrol;
 
         /// <summary>
+        /// Control txtavatar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtavatar;
+
+        /// <summary>
         /// Control btnGuardar.
         /// </summary>
         /// <remarks>
@@ -85,24 +85,6 @@ namespace ReservaAH
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardar;
-
-        /// <summary>
-        /// Control btnactualizar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnactualizar;
-
-        /// <summary>
-        /// Control btnaeliminar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnaeliminar;
 
         /// <summary>
         /// Control gvUser.
